@@ -2,7 +2,7 @@ package com.example.sendo.models.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+1
 @Entity
 @Table(name= "user")
 @NoArgsConstructor
