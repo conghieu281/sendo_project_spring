@@ -1,7 +1,10 @@
 package com.example.sendo.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name= "user")
@@ -22,4 +25,16 @@ public class User {
     private String password;
 
     private Boolean status;
+
+    @Column(name = "roleId", insertable = false, updatable = false)
+    private Long roleId;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "roleId", foreignKey = @ForeignKey(name = "fk_user_role"))
+    private Role role;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Order> orderList;
 }
